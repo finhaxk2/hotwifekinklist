@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinklist Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            text-align: center;
+        }
+        .choices {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .choice {
+            padding: 10px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            width: 100px;
+        }
+        .choice.not-entered { background-color: #ffffff; }
+        .choice.favorite { background-color: #6666ff; }
+        .choice.like { background-color: #66ff66; }
+        .choice.maybe { background-color: #ff9966; }
+        .choice.limit { background-color: #ffff66; }
+        .choice.no { background-color: #ff6666; }
+        .item-buttons .not-entered { background-color: #ffffff; }
+        .item-buttons .favorite { background-color: #d9d9ff; }
+        .item-buttons .like { background-color: #d9ffd9; }
+        .item-buttons .maybe { background-color: #ffe6cc; }
+        .item-buttons .limit { background-color: #ffffd9; }
+        .item-buttons .no { background-color: #ffd9d9; }
+        .selected {
+            border: 2px solid #000;
+        }
+        .selected.favorite { background-color: #6666ff; }
+        .selected.like { background-color: #66ff66; }
+        .selected.maybe { background-color: #ff9966; }
+        .selected.limit { background-color: #ffff66; }
+        .selected.no { background-color: #ff6666; }
+        .category {
+            margin: 20px 0 10px;
+            padding: 10px;
+            background-color: #d3d3d3;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            color: #000;
+        }
+        .item {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .item-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .item-buttons button {
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 15%;
+        }
+        #finish {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #finish:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        #results {
+            display: none;
+        }
+        #results h2 {
+            text-align: center;
+        }
+        .result-item {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .result-item.favorite { background-color: #6666ff; }
+        .result-item.like { background-color: #66ff66; }
+        .result-item.maybe { background-color: #ff9966; }
+        .result-item.limit { background-color: #ffff66; }
+        .result-item.no { background-color: #ff6666; }
+        .result-item.not-entered { background-color: #ffffff; }
+    </style>
+</head>
+<body>
+    <h1>Kinklist Generator</h1>
+    <div class="choices">
+        <div class="choice not-entered">Not Entered</div>
+        <div class="choice favorite">Favorite</div>
+        <div class="choice like">Like</div>
+        <div class="choice maybe">Maybe</div>
+        <div class="choice limit">Limit</div>
+        <div class="choice no">No</div>
+    </div>
+    <div id="kinklist"></div>
+    <button id="finish" disabled>Finish</button>
+    <div id="results">
+        <h2>Your Kinklist Results</h2>
+        <p style="text-align: center;">Please take a screenshot of your results.</p>
+        <div id="results-list"></div>
+    </div>
+
+    <script>
+        const categories = [
+            { name: "General", items: Array(8).fill().map((_, i) => ({ name: `Placeholder ${i + 1}` })) },
+            { name: "Bondage", items: Array(8).fill().map((_, i) => ({ name: `Placeholder ${i + 1}` })) },
+            { name: "Toys", items: Array(8).fill().map((_, i) => ({ name: `Placeholder ${i + 1}` })) },
+            { name: "Roleplay", items: Array(8).fill().map((_, i) => ({ name: `Placeholder ${i + 1}` })) },
+            { name: "Other", items: Array(8).fill().map((_, i) => ({ name: `Placeholder ${i + 1}` })) }
+        ];
+
+        const items = categories.flatMap(category => 
+            category.items.map(item => ({ category: category.name, name: item.name }))
+        );
+
+        const choices = ['not-entered', 'favorite', 'like', 'maybe', 'limit', 'no'];
+        const kinklistDiv = document.getElementById('kinklist');
+        const finishButton = document.getElementById('finish');
+        const resultsDiv = document.getElementById('results');
+        const resultsList = document.getElementById('results-list');
+        const selections = {};
+
+        function renderList() {
+            kinklistDiv.innerHTML = '';
+            categories.forEach(category => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+                categoryDiv.textContent = category.name;
+                kinklistDiv.appendChild(categoryDiv);
+
+                category.items.forEach((item, index) => {
+                    const globalIndex = items.findIndex(i => i.category === category.name && i.name === item.name);
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'item';
+                    itemDiv.innerHTML = `${item.name}`;
+                    const buttonsDiv = document.createElement('div');
+                    buttonsDiv.className = 'item-buttons';
+                    choices.forEach(choice => {
+                        const button = document.createElement('button');
+                        button.className = choice;
+                        button.textContent = choice.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                        button.onclick = () => selectChoice(globalIndex, choice);
+                        if (selections[globalIndex] === choice) {
+                            button.classList.add('selected');
+                        }
+                        buttonsDiv.appendChild(button);
+                    });
+                    itemDiv.appendChild(buttonsDiv);
+                    kinklistDiv.appendChild(itemDiv);
+                });
+            });
+            checkAllSelected();
+        }
+
+        function selectChoice(itemIndex, choice) {
+            selections[itemIndex] = choice;
+            renderList();
+        }
+
+        function checkAllSelected() {
+            const allSelected = items.every((_, index) => selections[index] !== undefined);
+            finishButton.disabled = !allSelected;
+        }
+
+        function showResults() {
+            kinklistDiv.style.display = 'none';
+            finishButton.style.display = 'none';
+            resultsDiv.style.display = 'block';
+            resultsList.innerHTML = '';
+            categories.forEach(category => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+                categoryDiv.textContent = category.name;
+                resultsList.appendChild(categoryDiv);
+
+                category.items.forEach((item) => {
+                    const globalIndex = items.findIndex(i => i.category === category.name && i.name === item.name);
+                    const choice = selections[globalIndex] || 'not-entered';
+                    const resultDiv = document.createElement('div');
+                    resultDiv.className = `result-item ${choice}`;
+                    resultDiv.innerHTML = `${item.name} - ${choice.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}`;
+                    resultsList.appendChild(resultDiv);
+                });
+            });
+        }
+
+        finishButton.onclick = showResults;
+
+        renderList();
+    </script>
+</body>
+</html>
