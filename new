@@ -131,11 +131,151 @@
 
     <script>
         const categories = [
-            { name: "General", items: Array(8).fill().map((_, i) => ({ name: `Placeholder ${i + 1}` })) },
-            { name: "Bondage", items: Array(8).fill().map((_, i) => ({ name: `Placeholder ${i + 1}` })) },
-            { name: "Toys", items: Array(8).fill().map((_, i) => ({ name: `Placeholder ${i + 1}` })) },
-            { name: "Roleplay", items: Array(8).fill().map((_, i) => ({ name: `Placeholder ${i + 1}` })) },
-            { name: "Other", items: Array(8).fill().map((_, i) => ({ name: `Placeholder ${i + 1}` })) }
+            {
+                name: "Penis Size",
+                items: [
+                    { name: "Cucks current size" },
+                    { name: "Bulls current size" },
+                    { name: "1-2”" },
+                    { name: "3-4”" },
+                    { name: "5-6”" },
+                    { name: "7-8”" },
+                    { name: "9-10”" },
+                    { name: "11”+" },
+                    { name: "Thin" },
+                    { name: "Average" },
+                    { name: "Thick" },
+                    { name: "Very thick" }
+                ]
+            },
+            {
+                name: "Arrangements",
+                items: [
+                    { name: "Sleep with 1-2 new bulls only" },
+                    { name: "Sleep with the same 1-2 bulls repeatedly" },
+                    { name: "Long term sexual relationship with 1-2 bulls" },
+                    { name: "Sleep with several bulls at the same time" },
+                    { name: "Boyfriend/girlfriend relationship with bull(s)" },
+                    { name: "Hookup with cucks friends" },
+                    { name: "Single night meetups" },
+                    { name: "Day long meetups" },
+                    { name: "Multiple day and night meetups" },
+                    { name: "Week long meetups" },
+                    { name: "Hanging out for a day before sex" },
+                    { name: "Meeting up only for sex" },
+                    { name: "Free use for bull" },
+                    { name: "Bdsm relationship with bull" }
+                ]
+            },
+            {
+                name: "Hotwife/Bull Relationship Kinks",
+                items: [
+                    { name: "Pussy “owned” by bull" },
+                    { name: "Ass “owned” by bull" },
+                    { name: "Mouth “owned” by bull" },
+                    { name: "Vaginal sex with bull" },
+                    { name: "Anal sex with bull" },
+                    { name: "Blow jobs with bull" },
+                    { name: "Sub for bull" },
+                    { name: "Dom for bull" },
+                    { name: "Giving up all control to bull" },
+                    { name: "Spit" },
+                    { name: "Dildos" },
+                    { name: "Daddy/baby girl" }
+                ]
+            },
+            {
+                name: "Hotwife/Cuck Relationship",
+                items: [
+                    { name: "Pussy “owned” by cuck" },
+                    { name: "Ass “owned” by cuck" },
+                    { name: "Mouth “owned” by cuck" },
+                    { name: "Vaginal sex with cuck" },
+                    { name: "Anal sex with cuck" },
+                    { name: "Blow jobs with cuck" },
+                    { name: "Clean up after meeting with bull" },
+                    { name: "Reverse pegging cuck" },
+                    { name: "Penis sleeves" },
+                    { name: "Dildos" },
+                    { name: "Chastity" },
+                    { name: "Spit" },
+                    { name: "Pegging" },
+                    { name: "Controlling cucks masterbation" },
+                    { name: "Ruined orgasms" },
+                    { name: "Cum blocking" },
+                    { name: "Edging" },
+                    { name: "Orgasm denial during meetups" },
+                    { name: "Complete orgasm denial" },
+                    { name: "Pussy denial" },
+                    { name: "Pussy free" },
+                    { name: "Sub for cuck" },
+                    { name: "Dom for cuck" },
+                    { name: "Sending private meetup videos to cuck" },
+                    { name: "Filming/uploading bull/hotwife porn" },
+                    { name: "Daddy/baby girl" }
+                ]
+            },
+            {
+                name: "Humiliation",
+                items: [
+                    { name: "Cuck chair" },
+                    { name: "Cucks records encounter" },
+                    { name: "Cuck in another room" },
+                    { name: "Cuck not present" },
+                    { name: "Bull telling cuck what to do" },
+                    { name: "Small penis humiliation" },
+                    { name: "Inducing jealousy in cuck" },
+                    { name: "Committing to bull more sexually" },
+                    { name: "Commuting to cuck more sexually" },
+                    { name: "Cuck wears hotwife’s undies/clothes" },
+                    { name: "Feminization" },
+                    { name: "Femdom" },
+                    { name: "Teasing cuck with while in public with bull" }
+                ]
+            },
+            {
+                name: "Bull Access/Use",
+                items: [
+                    { name: "Free use/any time (even if not in the mood)" },
+                    { name: "Week long sex vacation with just bull" },
+                    { name: "Week long sex vacation with bull and cuck" },
+                    { name: "Every day" },
+                    { name: "Every week" },
+                    { name: "Twice per month" },
+                    { name: "Once per month" },
+                    { name: "1-2 times Yearly" },
+                    { name: "Private meetups with bull" },
+                    { name: "Meetups with bull and cuck" },
+                    { name: "Anal just for bull" },
+                    { name: "Pussy just for bull" },
+                    { name: "Mouth just for bull" },
+                    { name: "Will do stuff for bull but not for hubby" },
+                    { name: "Lingerie for bull" },
+                    { name: "Creampies from bull or anywhere" }
+                ]
+            },
+            {
+                name: "Cuck Access/Denial",
+                items: [
+                    { name: "Sex any time he wants" },
+                    { name: "Sex sometimes" },
+                    { name: "Sex at my discretion" },
+                    { name: "Sex at bulls discretion" },
+                    { name: "Sex Rarely" },
+                    { name: "Pussy free" },
+                    { name: "Sloppy seconds" },
+                    { name: "Hand jobs (or similar) only" },
+                    { name: "Foot jobs (or similar) only" },
+                    { name: "Blow Jobs (or similar) only" },
+                    { name: "Thigh fucking (or similar) only" },
+                    { name: "Self masterbation only" },
+                    { name: "Chastity" },
+                    { name: "Lingerie for cuck" },
+                    { name: "Sexting/nudes for bull but not for cuck" },
+                    { name: "Creampies from cuck" },
+                    { name: "Cuck “wastes” cum (floor/toilet/hand) while bull cums on or in you" }
+                ]
+            }
         ];
 
         const items = categories.flatMap(category => 
